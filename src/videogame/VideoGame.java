@@ -131,6 +131,9 @@ public class VideoGame extends JComponent implements KeyListener {
     
     int[] hairx = {hero.x - camx, hero.x - 7 - camx, hero.x - 4 - camx, hero.x + 33 - camx, hero.x + 38 - camx, hero.x + 48 - camx, hero.x + 53 - camx, hero.x + 58 - camx, hero.x + 58 - camx, hero.x + 53 - camx, hero.x + 58 - camx, hero.x + 33 - camx, hero.x + 36 - camx, hero.x + 13 - camx};
     int[] hairy = {hero.y + 21, hero.y + 13, hero.y - 8, hero.y - 9, hero.y - 5, hero.y - 7, hero.y - 6, hero.y - 4, hero.y + 17, hero.y + 20, hero.y + 16, hero.y + 19, hero.y + 22, hero.y + 17};
+    
+    int win = - 1000;
+    
     // drawing of the game happens in here
     // we use the Graphics object, g, to perform the drawing
     // NOTE: This is already double buffered!(helps with framerate/speed)
@@ -533,6 +536,11 @@ public class VideoGame extends JComponent implements KeyListener {
         g.setColor(Color.WHITE);
         g.drawString("GAME OVER", t1, 290);
         g.drawString("" + score, t2, 300);
+        
+        g.setColor(Color.RED);
+        g.fillRoundRect(win, 50, 400, 50, 10, 10);
+        g.setColor(Color.white);
+        g.fillRoundRect(win, 50, 400, 150, 10, 10);
 
 
         // GAME DRAWING ENDS HERE
@@ -839,12 +847,12 @@ public class VideoGame extends JComponent implements KeyListener {
                 score ++;
                 
             }
-            if (score >= 150){
+            if (score >= 10){
                     end = true;
                     done = true;
                 }
 
-            if (end == true) {
+            if (end == true & score <= 10) {
                 endx = WIDTH - WIDTH;
                 endy = HEIGHT - HEIGHT;
 
@@ -889,6 +897,23 @@ public class VideoGame extends JComponent implements KeyListener {
                 overy11 = 200;
                 overy12 = 195;
 
+            }
+            if (end == true & score >= 10) {
+                endx = WIDTH - WIDTH;
+                endy = HEIGHT - HEIGHT;
+
+                t1 = WIDTH / 2 - 30;
+                t2 = WIDTH / 2 - 5;
+                
+                nx1 = WIDTH - WIDTH - 500;
+                nx2 = WIDTH/2;
+                
+                ax1 = WIDTH/2 - 400;
+                ax2 = WIDTH/2;
+                ax3 = WIDTH/2 - 300;
+                ax4 = WIDTH/2;
+                
+                win = WIDTH/2 + 100;
             }
 
             //enemy spawn
